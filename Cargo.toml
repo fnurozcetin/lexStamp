@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "contracts/document_timestamp",
+]
+resolver = "2"
