@@ -1,163 +1,137 @@
-# LexStamp - Secure Document Timestamping dApp
+Readme
 
-A comprehensive document timestamping and digital signature application built with React, Stellar Soroban smart contracts, IPFS, and passkey authentication.
+📜 LexStamp – Blockchain Timestamp and Evidence System for Intellectual Property
 
-## Features
+🌐 Overview
 
-### 🔐 Security First
-- **Passkey Authentication**: WebAuthn-based login for maximum security
-- **Stellar Wallet Integration**: Connect with Freighter wallet
-- **SHA-256 Hashing**: Client-side document hashing for privacy
-- **Blockchain Timestamping**: Immutable timestamps on Stellar blockchain
+LexStamp is a blockchain solution that enables creators, entrepreneurs, and legal professionals to record their ideas, designs, or documents in a decentralised and time-stamped manner.
 
-### 📄 Document Management
-- **Upload & Sign**: Drag-and-drop PDF upload with automated processing
-- **Document Home**: View all your timestamped documents
-- **Incoming Documents**: Receive and manage documents from others
-- **Document Viewer**: Embedded PDF viewer with metadata display
+Using the Stellar blockchain infrastructure and the SHA-256 cryptographic hash algorithm, LexStamp aims to document WHO created ideas and When in a manner that can be used as evidence in court — without revealing the content of the file.
 
-### 🔗 Decentralized Storage
-- **IPFS Integration**: Secure, distributed document storage
-- **Privacy Preserving**: Only document hashes stored on-chain
-- **Content Addressing**: Cryptographic verification of document integrity
+🚩 Problem
 
-### 🌟 User Experience
-- **Responsive Design**: Works seamlessly on all devices
-- **Real-time Status**: Live processing updates during uploads
-- **Smooth Animations**: Polished UI with micro-interactions
-- **Intuitive Navigation**: Clean, professional interface
+The following problems are encountered in the Protection of Intellectual Property:
 
-## Technology Stack
+Current registration and approval processes are expensive, slow, and bureaucratic (costs can reach 10,000-15,000 TL on average, and the registration process can take up to 2 years)
 
-### Frontend
-- **React 18** with TypeScript
-- **Tailwind CSS** for styling
-- **React Router** for navigation
-- **Lucide React** for icons
-- **React Dropzone** for file uploads
+Creative individuals löse time and Money trying to protect their ideas
 
-### Blockchain
-- **Stellar Soroban** smart contracts (Rust)
-- **Stellar SDK** for blockchain interaction
-- **Freighter Wallet** integration
+In Cases of idea theft, the burden of proof is weak
 
-### Storage & Security
-- **IPFS** via Web3.Storage
-- **CryptoJS** for SHA-256 hashing
-- **WebAuthn** for passkey authentication
+LexStamp eliminates these problems with a privacy-friendly, fast and accessible solution.
 
-## Quick Start
+🔍 Solution
 
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-- Stellar Testnet account
-- Freighter wallet extension
+With LexStamp, Users can:
 
-### Installation
+Upload their files (PDF, image, text, etc.)
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd document-timestamp-dapp
-   ```
+Create a local hash with SHA-256 in the browser
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+Create an immutable timestamp by writing this hash to the Stellar blockchain
 
-3. **Start development server**
-   ```bash
-   npm run dev
-   ```
+In the event of a dispute, they can prove the historical priority of their ideas via the blockchain
 
-4. **Open in browser**
-   Navigate to `http://localhost:5173`
+The transaction takes less than 5 seconds on average and costs 0.00001 XLM, which is less than 1 penny.
 
-### Smart Contract Deployment
+WHO is it for?
 
-1. **Install Soroban CLI**
-   ```bash
-   # Follow Stellar documentation for Soroban CLI setup
-   ```
+🎨 Designers, software developers, content creators
 
-2. **Build contract**
-   ```bash
-   cargo build --target wasm32-unknown-unknown --release
-   ```
+🚀 Entrepreneurs, startup founders
 
-3. **Deploy to testnet**
-   ```bash
-   soroban contract deploy --wasm target/wasm32-unknown-unknown/release/document_timestamp.wasm --network testnet
-   ```
+⚖ Lawyers, Trademark and patent attorneys
 
-## Architecture
+🔧 Technology Stack
 
-### Smart Contract Functions
+Layer Technology Description
 
-- `store_document()` - Store document metadata on blockchain
-- `get_documents_by_owner()` - Retrieve user's documents
-- `get_documents_received_by()` - Get incoming documents
-- `verify_document()` - Verify document integrity
-- `get_document()` - Fetch specific document metadata
+Cryptographic Hashing SHA-256 File content is summarised without being disclosed
 
-### Document Processing Flow
+Blockchain Stellar + Horizon API Fast, low-cost, decentralised structure
 
-1. **Upload**: User drops PDF file
-2. **Hash**: Generate SHA-256 hash client-side
-3. **IPFS**: Upload document to distributed storage
-4. **Blockchain**: Store metadata in Soroban contract
-5. **Verification**: Document ready for sharing/signing
+Front End React + TailwindCSS Modern, responsive user interface
 
-### Authentication Flow
+Optional Storage IPFS Decentralised storage for document content
 
-1. **Passkey Login**: WebAuthn credential creation/verification
-2. **Wallet Connection**: Freighter wallet integration
-3. **Session Management**: Secure session storage
-4. **Authorization**: Transaction signing with user keys
+🧪 Key Features
 
-## Security Considerations
+🔐 Privacy-friendly: Only the summary record is taken without uploading the file itself
 
-- Documents never stored on blockchain (only hashes)
-- Client-side hashing preserves privacy
-- Passkey authentication eliminates password risks
-- IPFS provides censorship-resistant storage
-- Smart contract ensures immutable timestamps
+💸 Low cost: Each transaction averages 0.00001 XLM
 
-## Development
+⚡ Instant confirmation: Transactions are finalised in less than 5 seconds
 
-### Project Structure
-```
-src/
-├── components/          # Reusable UI components
-├── contexts/           # React contexts (Auth, etc.)
-├── pages/              # Main application pages
-├── types/              # TypeScript type definitions
-├── utils/              # Utility functions
-└── contracts/          # Soroban smart contracts
-```
+📄 Evidential Records: Records processed through blockchain are transparent and immutable.
 
-### Key Components
-- `AuthProvider` - Authentication context and state
-- `Layout` - Main application layout with navigation
-- `Home` - Document overview and statistics
-- `UploadPage` - Document upload and processing
-- `IncomingPage` - Received documents management
-- `DocumentViewer` - PDF display and verification
+📊 Impact and Contribution Potential
 
-## Contributing
+90% cheaper Protection alternative
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+Transactions completed in less than 5 seconds
 
-## License
+Provides fast Protection for entrepreneurs, copyright and pre-registration.
 
-MIT License - see LICENSE file for details
+Provides the ability to obtain definitive evidence with an immutable blockchain structure.
 
-## Support
+📚 Roadmap
 
-For questions or support, please open an issue on GitHub.
+[ ] Mobile Interface Improvement: Will be made compatible with all devices
+
+[ ] PDF Time Stamp Certificate: Blockchain-verified document output
+
+[ ] Institutional Integration: Ability to integrate with existing registration methods
+
+[ ] Batch Upload Feature: For law firms and agencies
+
+🧪 Demo Status
+
+Feature Status
+
+File Upload ✅ Completed
+
+SHA-256 Hashing ✅ Completed
+
+Writing to Stellar ✅ Completed
+
+Transaction ID Display ✅ Completed
+
+IPFS Storage ⭕ Under Development
+
+Mobile-Friendly Interface ⭕ Beta
+
+🧠 Technical Details
+
+# LexStamp
+
+A Web3-based evidence System that acts as a timestamp on the Stellar blockchain.
+
+
+
+## Installation
+
+npm install
+
+npm run dev
+
+
+
+✍ Contributors
+
+Ayşe Senanur Aygür – Muhammet Emin Çiftçi Documentation & Strategy
+
+Fatmanur Özçetin – Blockchain Development
+
+Yeşim Kardem Alırsatar – Frontend Development
+
+📎 Resources
+
+Presentation: https://www.canva.com/design/DAGrEMarpkw/NtRI8nfZdTtlv04r-tDGnw/edit?utm_content=DAGrEMarpkw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+Stellar Developer Documentation
+
+ETHGlobal IPFS Timestamp Projects
+
+Turkish Ministry of Justice Digital Evidence Guide
+
+LexStamp was developed as part of the 2025 Stellar LaunchTube Hackathon. The goal is to enable the preservation of creative productions in the digital age over time with blockchain security.
