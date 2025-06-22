@@ -10,12 +10,19 @@ export interface DocumentMetadata {
   ipfsCid: string;
   creator: string;
   timestamp: number;
+  receiver?: string;
+  signers: string[];
+  signatures: string[];
+  status: 'signed' | 'pending' | 'unsigned' | 'verified';
   fileName: string;
   fileSize: number;
-  receiver?: string;
-  status: 'pending' | 'signed' | 'verified' | 'rejected';
 }
 
+export interface ContractCallResult {
+  success: boolean;
+  transactionId?: string;
+  error?: string;
+}
 export interface AuthContextType {
   user: User | null;
   isLoading: boolean;

@@ -50,15 +50,21 @@ export default function LoginPage() {
     }
 
     async function login() {
-        const { keyIdBase64, contractId: cid } = await account.connectWallet();
-
-        console.log("keyIdBase64:", keyIdBase64);
-        updateKeyId(keyIdBase64)
-        localStorage.setItem("ssd:keyId", keyIdBase64);
-
-        console.log("oldu");
-        updateContractId(cid);
-        console.log("Contract ID:", cid);
+        try {
+            const { keyIdBase64, contractId: cid } = await account.connectWallet();
+            if (!keyIdBase64 || !cid) {
+                console.error("Invalid response from connectWallet:", { keyIdBase64, cid });
+                throw new Error("connectWallet returned undefined keyIdBase64 or contractId");
+            }
+            console.log("keyIdBase64:", keyIdBase64);
+            updateKeyId(keyIdBase64);
+            localStorage.setItem("ssd:keyId", keyIdBase64);
+            console.log("Contract ID:", cid);
+            updateContractId(cid);
+        } catch (error) {
+            console.error("Error in login:", error);
+            throw error;
+        }
     }
 
     async function logout() {
@@ -147,13 +153,13 @@ export default function LoginPage() {
                         <>
                             <div className="flex flex-col gap-4">
                             <button
-                                className="w-full underline text-blue-600 hover:text-blue-800"
+                                className="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-4 px-6 rounded-xl font-semibold hover:from-primary-700 hover:to-secondary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                                 onClick={login}
                             >
                                 Login
                             </button>
                             <button
-                                className="w-full bg-lime-500 text-lime-950 py-3 px-6 rounded-xl font-semibold hover:bg-lime-400 transition-all duration-200 disabled:opacity-50"
+                                className="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-4 px-6 rounded-xl font-semibold hover:from-primary-700 hover:to-secondary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                                 onClick={signUp}
                                 disabled={creating}
                             >

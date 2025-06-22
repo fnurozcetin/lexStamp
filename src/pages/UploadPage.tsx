@@ -3,8 +3,9 @@ import { useDropzone } from 'react-dropzone';
 import { useAuth } from '../contexts/AuthContext';
 import { generateSHA256 } from '../utils/crypto';
 import { uploadToIPFS } from '../utils/ipfs';
-import { callSorobanContract } from '../utils/stellar';
+import { callSorobanContract, getDocumentsByOwner } from '../utils/stellar';
 import { Upload, FileText, Check, AlertCircle, Hash, Globe, Send } from 'lucide-react';
+import { Address, nativeToScVal } from '@stellar/stellar-sdk';
 
 interface UploadStep {
   id: string;
@@ -72,24 +73,33 @@ const UploadPage: React.FC = () => {
 
       // Step 3: Call smart contract
       updateStepStatus('contract', 'processing');
+      const params = [
+        { type: 'bytes', value: Buffer.from(hash, 'hex') }, // hash as Bytes
+        { type: 'bytes', value: Buffer.from(cid, 'utf-8') }, // ipfs_cid as Bytes
+        { type: 'address', value: new Address(user.publicKey) }, // creator as Address
+        receiver ? { type: 'address', value: new Address(receiver) } : { type: 'void' }, // receiver as Option<Address>
+        { type: 'vec', value: [] }, // signers as Vec<Address> (empty for now, add signers if needed)
+      ];
+
       const result = await callSorobanContract(
-        'CONTRACT_ADDRESS', // Replace with actual contract address
+        'CDSE3HOHVIP2PPHPRPTMF5HGWCTGUXR4N2OBKGAQFC3HRPL2TMTDUVMN',
         'store_document',
-        [hash, cid, user.publicKey, receiver || null],
+        params.map((param) => nativeToScVal(param.value, { type: param.type })),
         user.publicKey
       );
 
       if (result.success) {
         updateStepStatus('contract', 'completed');
+        // Optionally fetch updated documents
+        // const docs = await getDocumentsByOwner(user.publicKey);
+        // You may want to handle docs elsewhere if needed
       } else {
         updateStepStatus('contract', 'error');
         throw new Error(result.error || 'Contract call failed');
       }
-
     } catch (error) {
       console.error('Processing failed:', error);
-      // Mark current processing step as error
-      const currentStep = steps.find(step => step.status === 'processing');
+      const currentStep = steps.find((step) => step.status === 'processing');
       if (currentStep) {
         updateStepStatus(currentStep.id, 'error');
       }

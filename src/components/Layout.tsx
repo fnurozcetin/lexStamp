@@ -57,9 +57,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <div className="flex items-center space-x-2">
                 <div className="flex items-center space-x-2 px-3 py-2 bg-gray-100 rounded-lg">
                   <User className="h-4 w-4 text-gray-600" />
-                  <span className="text-sm font-medium text-gray-700">
-                    {user?.id.substring(0, 8)}
-                  </span>
                 </div>
                 
                 <button
